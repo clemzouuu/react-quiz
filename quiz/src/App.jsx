@@ -15,27 +15,34 @@ function App() {
     .then((data) => setAllQuestions(data.results))
   },[])
  
-
+  
   function startQuizzie () {
     setDisplayMenu(false)
     setDisplayQuizzie(true) 
   }
 
+  let id = 0 
   const displayQuestions = questions.map((element) => (
     <Quizzie
       question={element.question}
       correct_answer={element.correct_answer}
       incorrect_answers={element.incorrect_answers}
-    />
+    /> 
   ))
+
+  function handleSubmit(event) {
+    event.preventDefault() 
+    
+  }
   
   return (
     <div className="App">
-      {displayMenu && 
-      <HomePage 
-      startQuiz={startQuizzie}
-      />}
-    {displayQuestions}
+      {displayMenu && <HomePage startQuiz={startQuizzie} />}
+
+      <form className="form" onSubmit={handleSubmit}>
+        {displayQuestions}
+        <button className="form--submit"></button>
+      </form>
     </div>
   )
 }
