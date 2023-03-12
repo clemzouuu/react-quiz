@@ -1,39 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-export default function HomePage(props) {
-  
-  let answerArray = []
-  answerArray.push(props.correct_answer + ' ')
+export default function Quizzie(props) {
+   
+  const [incorrectAnswers,setAnswer] = useState(props.incorrect_answers)
 
-  for (let counter = 0; counter < 3; counter++) {
-    answerArray.push(props.incorrect_answers[counter] + ' ')
-  }
+  const [goodAnswer,setGoodAnswer] = useState(props.correct_answer)
 
-  const [clicked, setClicked] = useState(false)
+  const [array,setArray] = useState([])
 
-  function clickedAnswer() {
-    setClicked(true)
-  }
-
-  let styles = {
-    backgroundColor: clicked ? ' #0b2f72' : 'transparent',
-    color: clicked ? 'white ' : ' ',
-  }
-
-  let compteur = 0
-
-  const eachAnswer = answerArray.map((question) => (
-    <button className="answers" style={styles}>
-      {question}
-    </button>
-  ))
+  let allIncorrectAnswers = props.incorrect_answers.map(incorrect_answer => <p className='answers' onClick={props.toggleClick}>{incorrect_answer}</p>)
+ 
 
   return (
     <div className="quiz">
       <h1 className="questions">{props.question}</h1>
-      <p 
-      onClick={clickedAnswer}
-      >{eachAnswer}</p>
+        {allIncorrectAnswers}
+        <p className='answers' onClick={props.toggleClick}>{props.correct_answer}</p>
       <hr />
     </div>
   )
