@@ -41,6 +41,13 @@ function App() {
     
   }
 
+  function handdleClick(){
+     
+    
+  }
+
+
+
   return (
     <div className="App">
       {displayMenu && <HomePage startQuiz={startQuizzie} />}
